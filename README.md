@@ -22,13 +22,11 @@ python3 -m http.server 8000
 
 ## Asset
 
-- `assets/styling-portrait.webp` + `assets/styling-mask.png` — ritratto della
-  sezione “Styling Suite”, con maschera a pixel applicata via CSS `mask-image`.
-
-### Da sostituire
-
-Le polaroid della sezione “AI products” sono ancora placeholder a gradiente:
-vanno sostituite con gli export reali da Figma (`.ph-a` … `.ph-e` in
-`styles.css`).
+- `assets/styling-portrait.webp` — ritratto della sezione “Styling Suite”
+- `assets/product-*.{png,webp}` — foto prodotto della sezione “AI products”
+- `assets/styling-mask.png` — maschera a pixel applicata a tutte le foto via
+  CSS `mask-image` (inlinata come data URI in `styles.css`, variabile
+  `--pixel-mask`, perché le mask da URL esterno sono bloccate dal CORS quando
+  la pagina è aperta via `file://`)
 
 Il font di riferimento è **Poppins** (caricato da Google Fonts).
