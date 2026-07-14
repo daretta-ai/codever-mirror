@@ -269,8 +269,8 @@ h1 .line-soft, h2 .line-soft { display: block; color: var(--ink-soft); }
   line-height: 1.45;
 }
 
-.card-icon { width: 96px; height: 96px; }
-.card-icon svg { width: 100%; height: 100%; }
+.card-icon { width: 96px; height: 104px; }
+.card-icon img { width: 100%; height: 100%; object-fit: contain; }
 
 .card-foot {
   font-size: 0.68rem;
