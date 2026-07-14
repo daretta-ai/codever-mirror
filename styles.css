@@ -296,23 +296,16 @@ h1 .line-soft, h2 .line-soft { display: block; color: var(--ink-soft); }
     drop-shadow(0 16px 28px rgba(0, 0, 0, 0.45));
 }
 
-/* The pixel mask (640x836) keeps its own proportions instead of being
-   stretched to each photo: it is anchored to the bottom at a height of
-   --w x 836/640 (square pixel cells), while a solid layer covers whatever
-   remains above it (with a 2px overlap to avoid seams). On photos shorter
-   than the mask the solid layer collapses to zero and the mask alone,
-   cropped from the top, covers the whole image. */
+/* Same treatment as the Styling Suite portrait: the pixel mask is
+   stretched over the whole image box. */
 .product-card img {
   display: block;
   width: var(--w);
   height: auto;
-  --mask-h: calc(var(--w) * 1.30625);
-  -webkit-mask-image: linear-gradient(#000, #000), var(--pixel-mask);
-  mask-image: linear-gradient(#000, #000), var(--pixel-mask);
-  -webkit-mask-size: 100% max(0px, calc(100% - var(--mask-h) + 2px)), var(--w) var(--mask-h);
-  mask-size: 100% max(0px, calc(100% - var(--mask-h) + 2px)), var(--w) var(--mask-h);
-  -webkit-mask-position: top, bottom;
-  mask-position: top, bottom;
+  -webkit-mask-image: var(--pixel-mask);
+  mask-image: var(--pixel-mask);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
