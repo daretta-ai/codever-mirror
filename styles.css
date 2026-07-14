@@ -119,16 +119,22 @@ em {
   overflow: hidden;
 }
 
-.hero-glow {
-  position: absolute;
-  top: -260px;
-  left: -180px;
+.cursor-glow {
+  position: fixed;
+  top: -320px;
+  left: -360px;
   width: 720px;
   height: 640px;
   background: radial-gradient(closest-side, rgba(123, 92, 229, 0.4), transparent 72%);
   filter: blur(24px);
   pointer-events: none;
+  z-index: 0;
+  /* initial spot = the hero's top-left glow; main.js lerps it towards the cursor */
+  transform: translate3d(180px, 60px, 0);
+  will-change: transform;
 }
+
+main, .site-footer { position: relative; z-index: 1; }
 
 .grid-cells {
   position: absolute;

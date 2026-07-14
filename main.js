@@ -54,6 +54,32 @@
     el.appendChild(frag);
   });
 
+  /* ---- Cursor-following glow ---- */
+  const glow = document.querySelector(".cursor-glow");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (glow && !reducedMotion.matches) {
+    let targetX = 180, targetY = 60;   /* matches the CSS starting spot */
+    let x = targetX, y = targetY;
+    let raf = null;
+
+    function tick() {
+      x += (targetX - x) * 0.08;
+      y += (targetY - y) * 0.08;
+      glow.style.transform = "translate3d(" + x + "px, " + y + "px, 0)";
+      if (Math.abs(targetX - x) > 0.5 || Math.abs(targetY - y) > 0.5) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        raf = null;
+      }
+    }
+
+    window.addEventListener("mousemove", function (e) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (raf === null) raf = requestAnimationFrame(tick);
+    }, { passive: true });
+  }
+
   /* ---- Scroll reveal ---- */
   const revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
