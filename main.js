@@ -16,15 +16,14 @@
 
   const PALETTES = {
     violet: ["#6c4fd8", "#8a70e8", "#4a3596", "#2a2145", "#b9a6f0", "#7b5ce5"],
-    sage: ["#9aa08c", "#6f7563", "#4b5044", "#2b2e27", "#c4c9b4"],
   };
 
   /* ---- Pixel mosaics ---- */
   document.querySelectorAll("[data-mosaic]").forEach(function (el) {
     const palette = PALETTES[el.dataset.mosaic] || PALETTES.violet;
-    const cols = el.classList.contains("mosaic-footer") ? 24 : 8;
-    const rows = el.classList.contains("mosaic-footer") ? 5 : 3;
-    const rand = mulberry32(el.dataset.mosaic === "sage" ? 7 : 42);
+    const cols = 24;
+    const rows = 5;
+    const rand = mulberry32(42);
     const frag = document.createDocumentFragment();
     for (let i = 0; i < cols * rows; i++) {
       const cell = document.createElement("span");

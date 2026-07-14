@@ -20,14 +20,15 @@ npx serve .
 python3 -m http.server 8000
 ```
 
-## Asset da sostituire
+## Asset
 
-Le fotografie del design (polaroid nella sezione “AI products” e il ritratto
-nella sezione “Styling Suite”) non sono esportabili dallo screenshot: al loro
-posto ci sono placeholder a gradiente. Vanno sostituite con gli export reali
-da Figma:
+- `assets/styling-portrait.webp` + `assets/styling-mask.png` — ritratto della
+  sezione “Styling Suite”, con maschera a pixel applicata via CSS `mask-image`.
 
-- `.ph-a` … `.ph-e` in `styles.css` → immagini delle polaroid
-- `.portrait` in `styles.css` → ritratto fashion (sezione Styling Suite)
+### Da sostituire
+
+Le polaroid della sezione “AI products” sono ancora placeholder a gradiente:
+vanno sostituite con gli export reali da Figma (`.ph-a` … `.ph-e` in
+`styles.css`).
 
 Il font di riferimento è **Poppins** (caricato da Google Fonts).
