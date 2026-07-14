@@ -316,6 +316,20 @@ h1 .line-soft, h2 .line-soft { display: block; color: var(--ink-soft); }
   mask-repeat: no-repeat;
 }
 
+/* The mask PNG itself (solid purple, pixel-stepped holes) layered
+   semi-transparently over each shot to tint it purple; stretched
+   100% 100% like the mask so the silhouettes line up. */
+.product-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--pixel-mask);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
 .p1 { --w: 130px; top: 10%;  left: 9%;   transform: rotate(-4deg); }
 .p2 { --w: 150px; top: 6%;   right: 15%; transform: rotate(5deg); }
 .p3 { --w: 140px; top: 8%;   left: 46%;  transform: rotate(-2deg); }
