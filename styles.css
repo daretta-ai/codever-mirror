@@ -125,8 +125,8 @@ em {
   left: -360px;
   width: 720px;
   height: 640px;
-  background: radial-gradient(closest-side, rgba(123, 92, 229, 0.4), transparent 72%);
-  filter: blur(24px);
+  background: radial-gradient(closest-side, rgba(123, 92, 229, 0.22), rgba(123, 92, 229, 0.08) 55%, transparent 85%);
+  filter: blur(48px);
   pointer-events: none;
   z-index: 0;
   /* initial spot = the hero's top-left glow; main.js lerps it towards the cursor */
