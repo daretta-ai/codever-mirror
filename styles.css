@@ -296,25 +296,32 @@ h1 .line-soft, h2 .line-soft { display: block; color: var(--ink-soft); }
     drop-shadow(0 16px 28px rgba(0, 0, 0, 0.45));
 }
 
+/* The pixel mask (640x836) keeps its own proportions instead of being
+   stretched to each photo: it is anchored to the bottom at a height of
+   --w x 836/640 (square pixel cells), while a solid layer covers whatever
+   remains above it (with a 2px overlap to avoid seams). On photos shorter
+   than the mask the solid layer collapses to zero and the mask alone,
+   cropped from the top, covers the whole image. */
 .product-card img {
   display: block;
+  width: var(--w);
   height: auto;
-  -webkit-mask-image: var(--pixel-mask);
-  mask-image: var(--pixel-mask);
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
+  --mask-h: calc(var(--w) * 1.30625);
+  -webkit-mask-image: linear-gradient(#000, #000), var(--pixel-mask);
+  mask-image: linear-gradient(#000, #000), var(--pixel-mask);
+  -webkit-mask-size: 100% max(0px, calc(100% - var(--mask-h) + 2px)), var(--w) var(--mask-h);
+  mask-size: 100% max(0px, calc(100% - var(--mask-h) + 2px)), var(--w) var(--mask-h);
+  -webkit-mask-position: top, bottom;
+  mask-position: top, bottom;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
 
-.p1 { top: 10%;  left: 9%;   transform: rotate(-4deg); }
-.p1 img { width: 130px; }
-.p2 { top: 6%;   right: 15%; transform: rotate(5deg); }
-.p2 img { width: 150px; }
-.p3 { top: 8%;   left: 46%;  transform: rotate(-2deg); }
-.p3 img { width: 140px; }
-.p4 { top: 54%;  right: 10%; transform: rotate(3deg); }
-.p4 img { width: 170px; }
+.p1 { --w: 130px; top: 10%;  left: 9%;   transform: rotate(-4deg); }
+.p2 { --w: 150px; top: 6%;   right: 15%; transform: rotate(5deg); }
+.p3 { --w: 140px; top: 8%;   left: 46%;  transform: rotate(-2deg); }
+.p4 { --w: 130px; top: 50%;  right: 9%;  transform: rotate(3deg); }
+.p5 { --w: 170px; bottom: 8%; left: 13%; transform: rotate(-6deg); }
 
 /* ---------- Styling Suite ---------- */
 
