@@ -14,10 +14,18 @@ import { seed } from './seed'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+/* Origin del frontend autorizzati a chiamare le API dal browser */
+const frontendOrigins = (process.env.FRONTEND_URL || 'http://localhost:3001')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+
 export default buildConfig({
   admin: {
     user: Users.slug,
   },
+  cors: frontendOrigins,
+  csrf: frontendOrigins,
   collections: [Users, Media],
   globals: [Landing],
   editor: lexicalEditor(),

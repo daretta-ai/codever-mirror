@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
 
-import config from '@payload-config'
-import { getPayload } from 'payload'
 import React, { Fragment } from 'react'
 
-import type { Media } from '@/payload-types'
+import { fetchLanding, img } from '@/lib/cms'
 
 import { Effects } from './Effects'
 
@@ -23,17 +21,8 @@ const nl = (text?: string | null) => {
   ))
 }
 
-/* Estrae url e alt da un campo upload (popolato a depth >= 1) */
-const img = (media: Media | number | null | undefined) =>
-  media && typeof media === 'object' ? { src: media.url ?? '', alt: media.alt ?? '' } : null
-
-const getLanding = async () => {
-  const payload = await getPayload({ config })
-  return payload.findGlobal({ slug: 'landing', depth: 1 })
-}
-
 export async function generateMetadata(): Promise<Metadata> {
-  const landing = await getLanding()
+  const landing = await fetchLanding()
   return {
     title: landing.seoTitle,
     description: landing.seoDescription,
@@ -44,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const SHOT_DELAYS: (string | null)[] = [null, '.15s', '.05s', '.2s', '.1s']
 
 export default async function Page() {
-  const landing = await getLanding()
+  const landing = await fetchLanding()
   const portrait = img(landing.stylingPortrait)
 
   return (
@@ -61,7 +50,7 @@ export default async function Page() {
         </a>
         <nav className="main-nav" aria-label="Main">
           {landing.navLinks?.map((link) => (
-            <a key={link.id} href={link.href}>
+            <a key={link.id ?? link.href} href={link.href}>
               {link.label}
             </a>
           ))}
@@ -123,7 +112,7 @@ export default async function Page() {
               const icon = img(card.icon)
               return (
                 <article
-                  key={card.id}
+                  key={card.id ?? i}
                   className="service-card reveal"
                   style={i > 0 ? ({ '--reveal-delay': `.${i}s` } as CSSProperties) : undefined}
                 >
@@ -149,7 +138,7 @@ export default async function Page() {
             const delay = SHOT_DELAYS[i]
             return (
               <figure
-                key={shot.id}
+                key={shot.id ?? i}
                 className={`product-card p${i + 1} reveal`}
                 style={delay ? ({ '--reveal-delay': delay } as CSSProperties) : undefined}
               >
@@ -179,8 +168,8 @@ export default async function Page() {
             <p className="styling-focus">
               <strong>{landing.stylingFocusTitle}</strong>
               <br />
-              {landing.stylingFocusItems?.map((focus) => (
-                <Fragment key={focus.id}>
+              {landing.stylingFocusItems?.map((focus, i) => (
+                <Fragment key={focus.id ?? i}>
                   {focus.item}
                   <br />
                 </Fragment>

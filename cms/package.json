@@ -1,7 +1,7 @@
 {
-  "name": "codever-site",
+  "name": "codever-cms",
   "version": "1.0.0",
-  "description": "codever.it — landing page gestita con Payload CMS + Next.js",
+  "description": "codever.it — CMS headless (Payload 3): admin e API, nessun frontend",
   "private": true,
   "type": "module",
   "scripts": {
