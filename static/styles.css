@@ -44,7 +44,7 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
-em {
+em, i {
   font-style: italic;
   color: var(--violet-bright);
 }

@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Django / Wagtail
+db.sqlite3
+/media/
+/staticfiles/
+codever/settings/local.py
